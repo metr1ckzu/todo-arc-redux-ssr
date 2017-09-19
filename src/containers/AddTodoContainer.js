@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import { addTodo } from '../store/actions'
+import { addTodoRequest } from '../store/actions'
 import AddTodo from '../components/AddTodo'
 
 const mapDispatchToProps = {
-  addTodo: addTodo
+  addTodo: addTodoRequest
 }
 
 const AddTodoContainer = connect(null, mapDispatchToProps)(AddTodo)

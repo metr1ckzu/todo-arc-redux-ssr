@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { deleteTodo } from '../store/actions'
+import { deleteTodoRequest } from '../store/actions'
 import TodoList from '../components/TodoList'
 import { withDone } from 'react-router-server'
 import React from 'react'
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  onTodoClick: deleteTodo
+  onTodoClick: deleteTodoRequest
 }
 
 const VisibleTodoList = connect(

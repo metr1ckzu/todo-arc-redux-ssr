@@ -1,6 +1,6 @@
 const todos = (state = [], action, payload) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case 'ADD_TODO_SUCCESS':
       return [
         ...state,
         {
@@ -8,8 +8,8 @@ const todos = (state = [], action, payload) => {
           text: action.payload.text
         }
       ]
-    case 'DELETE_TODO':
-      return state.filter(todo => todo.id !== action.id)
+    case 'DELETE_TODO_SUCCESS':
+      return state.filter(todo => todo.id !== action.payload.id)
 
     case 'FETCH_TODOS_SUCCESS':
       return state.concat(action.payload.fetchedData)

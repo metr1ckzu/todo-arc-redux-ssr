@@ -1,6 +1,6 @@
-import { call, put, take, takeEvery, fork } from 'redux-saga/effects'
+import { call, put, take, takeLatest, fork } from 'redux-saga/effects'
 import axios from 'axios'
-import { fetchTodosSuccess, addTodoSuccess } from './actions'
+import { fetchTodosSuccess, addTodoSuccess, deleteTodoSuccess } from './actions'
 
 
 export function* fetchTodos() {
@@ -18,7 +18,7 @@ export function* fetchTodos() {
 
 export function* addTodo(text) {
   const apiResponse = yield call(
-    axios.post,
+    axios,
     {
       method: 'POST',
       url: 'http://localhost:3002/todos/',
@@ -30,6 +30,18 @@ export function* addTodo(text) {
 
   yield put(
     addTodoSuccess(text, apiResponse.data.id)
+  )
+}
+
+export function* deleteTodo(id) {
+  const url = 'http://localhost:3002/todos/' + id
+  const apiResponse = yield call(
+    axios.delete,
+    url
+    )
+
+  yield put(
+    deleteTodoSuccess(id)
   )
 }
 
@@ -48,7 +60,15 @@ export function* addTodoRequest() {
   }
 }
 
+export function* deleteTodoRequest() {
+  while (true) {
+    const { id } = yield take('DELETE_TODO_REQUEST')
+    yield call(deleteTodo, id)
+  }
+}
+
 export default function* () {
   yield fork(fetchTodosRequest)
   yield fork(addTodoRequest)
+  yield fork(deleteTodoRequest)
 }
