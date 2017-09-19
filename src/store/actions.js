@@ -1,32 +1,10 @@
-import axios from 'axios'
+// https://github.com/diegohaz/arc/wiki/Actions
+const req = require.context('.', true, /\.\/.+\/actions\.js$/)
 
-export function fetchTodos() {
-  return function(dispatch) {
-    axios.get('http://localhost:3002/todos')
-      .then((response) => {
-        const fetchedData = response.data
-        dispatch({type: 'FETCHED_TODOS', fetchedData})
-      })
-  }
-}
+req.keys().forEach((key) => {
+  const actions = req(key)
 
-export function deleteTodo(id) {
-  return function(dispatch) {
-    axios.delete('http://localhost:3002/todos/'+id)
-      .then(dispatch({type: 'DELETE_TODO', id}))
-  }
-}
-
-export function addTodo(text) {
-  return function(dispatch) {
-    const id = Date.now();
-    axios({
-      method: 'POST',
-      url: 'http://localhost:3002/todos/',
-      data: {
-        id: id,
-        text: text
-      }
-    }).then(dispatch({type: 'ADD_TODO', id: id, text}))
-  }
-}
+  Object.keys(actions).forEach((name) => {
+    module.exports[name] = actions[name]
+  })
+})

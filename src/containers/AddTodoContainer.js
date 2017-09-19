@@ -6,6 +6,6 @@ const mapDispatchToProps = {
   addTodo: addTodo
 }
 
-let AddTodoContainer = connect(null, mapDispatchToProps)(AddTodo)
+const AddTodoContainer = connect(null, mapDispatchToProps)(AddTodo)
 
 export default AddTodoContainer

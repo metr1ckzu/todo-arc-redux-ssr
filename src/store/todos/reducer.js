@@ -1,20 +1,18 @@
-const todos = (state = [], action) => {
+const todos = (state = [], action, payload) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
         ...state,
         {
-          id: action.id,
-          text: action.text
+          id: payload.id,
+          text: payload.text
         }
       ]
     case 'DELETE_TODO':
       return state.filter(todo => todo.id !== action.id)
 
-    case 'FETCHED_TODOS':
-      // console.log(typeof(action.todos))
-      // console.log(action.todos)
-      return state.concat(action.fetchedData)
+    case 'FETCH_TODOS_SUCCESS':
+      return state.concat(payload.fetchedData)
 
     default:
       return state
