@@ -32,12 +32,22 @@
 // }
 //
 
-const id = Date.now();
-export const addTodo = (text, id) => ({
-  type: 'ADD_TODO',
-  payload: {text, id}
-})
+// const id = Date.now();
+// export const addTodo = (text, id) => ({
+//   type: 'ADD_TODO',
+//   payload: {text, id}
+// })
 
+export function addTodo(text) {
+  const id = Date.now()
+  return {type: 'ADD_TODO', payload: {text, id}}
+}
+
+export function fetchTodosRequest() {
+  return {
+    type: 'TODOS_UPDATE_REQUEST'
+  }
+}
 export const deleteTodo = (id) => ({
   type: 'DELETE_TODO',
   payload: {id}
@@ -46,8 +56,4 @@ export const deleteTodo = (id) => ({
 export const fetchTodosSuccess = (fetchedData) => ({
   type: 'FETCH_TODOS_SUCCESS',
   payload: {fetchedData}
-})
-
-export const fetchTodosRequest = () => ({
-  type: 'TODOS_UPDATE_REQUEST'
 })

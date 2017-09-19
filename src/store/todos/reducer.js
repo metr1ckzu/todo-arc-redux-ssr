@@ -4,15 +4,15 @@ const todos = (state = [], action, payload) => {
       return [
         ...state,
         {
-          id: payload.id,
-          text: payload.text
+          id: action.payload.id,
+          text: action.payload.text
         }
       ]
     case 'DELETE_TODO':
       return state.filter(todo => todo.id !== action.id)
 
     case 'FETCH_TODOS_SUCCESS':
-      return state.concat(payload.fetchedData)
+      return state.concat(action.payload.fetchedData)
 
     default:
       return state

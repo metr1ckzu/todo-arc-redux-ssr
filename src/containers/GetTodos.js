@@ -1,11 +1,15 @@
 import { connect } from 'react-redux'
 import { fetchTodos } from '../store/actions'
 import GetTodosButton from '../components/GetTodosButton'
-import { fetchTodoRequest } from '../store/actions'
+import { fetchTodosRequest } from '../store/actions'
 
-const mapDispatchToProps = {
-  onClick: fetchTodoRequest
-}
+// const mapDispatchToProps = {
+//   onClick: fetchTodoRequest
+// }
+
+const mapDispatchToProps = (dispatch) => ({
+  onClick: () => dispatch(fetchTodosRequest())
+})
 
 const GetTodos = connect(null, mapDispatchToProps)(GetTodosButton)
 
