@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
-import { deleteTodoRequest } from '../store/actions'
+import { deleteTodoRequest, fetchTodosRequest } from '../store/actions'
 import TodoList from '../components/TodoList'
-import { withDone } from 'react-router-server'
+import { fetchState } from 'react-router-server'
 import React from 'react'
+import { isBrowser, isServer } from 'config'
 
 const mapStateToProps = state => {
   return {
@@ -20,7 +21,7 @@ const VisibleTodoList = connect(
 )(TodoList)
 
 export default VisibleTodoList
-
+//
 // class VisibleTodoList extends React.Component {
 //   componentWillMount() {
 //     this.props.readAPI()
@@ -31,8 +32,14 @@ export default VisibleTodoList
 //   }
 // }
 //
+// const mapStateToProps = state => {
+//   return {
+//     todos: state.todos
+//   }
+// }
+//
 // const mapDispatchToProps = (dispatch, { done }) => ({
-//   readAPI: () => dispatch(fetchSaga()).then(done, done)
+//   readAPI: () => dispatch(fetchTodosRequest()).then(done, done)
 // })
 //
-// export default withDone(connect(null, mapDispatchToProps)(VisibleTodoList))
+// export default withDone(connect(mapStateToProps, mapDispatchToProps)(VisibleTodoList))
