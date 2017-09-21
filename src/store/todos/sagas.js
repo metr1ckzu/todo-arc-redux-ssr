@@ -67,7 +67,7 @@ export function* deleteTodoRequest() {
   }
 }
 
-export default function* defaultTodoSaga () {
+export default function* () {
   yield fork(fetchTodosRequest)
   yield fork(addTodoRequest)
   yield fork(deleteTodoRequest)

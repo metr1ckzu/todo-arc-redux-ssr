@@ -1,6 +1,7 @@
-import { call, put, take } from 'redux-saga/effects'
+import { call, put, take, fork } from 'redux-saga/effects'
 import { expectSaga, testSaga } from 'redux-saga-test-plan'
 import { fetchTodos, addTodo, deleteTodo, fetchTodosRequest, addTodoRequest, deleteTodoRequest, defaultTodoSaga } from './sagas'
+import saga from './sagas'
 import moxios from 'moxios'
 import axios from 'axios'
 import { fetchTodosSuccess, addTodoSuccess, deleteTodoSuccess } from './actions'
@@ -69,27 +70,31 @@ describe('todos sagas tests', () => {
       .run()
   })
 
-  it('fetchTodosRequest test', () => {
-    return expectSaga(fetchTodosRequest)
-      .take('TODOS_UPDATE_REQUEST')
-      .dispatch(fetchTodos)
-      .silentRun()
-  })
-
   it('addTodoRequest test', () => {
+    const generator = addTodoRequest()
     const text = 'kek'
-    return expectSaga(addTodoRequest)
-      .take('ADD_TODO_REQUEST')
-      .dispatch(addTodo, text)
-      .silentRun()
+    expect(generator.next().value).toEqual(take('ADD_TODO_REQUEST'))
+    expect(generator.next({text}).value).toEqual(call(addTodo, 'kek'))
   })
 
   it('deleteTodoRequest test', () => {
+    const generator = deleteTodoRequest()
     const id = 1
-    return expectSaga(deleteTodoRequest)
-      .take('DELETE_TODO_REQUEST')
-      .dispatch(deleteTodo, id)
-      .silentRun()
+    expect(generator.next().value).toEqual(take('DELETE_TODO_REQUEST'))
+    expect(generator.next({id}).value).toEqual(call(deleteTodo, id))
+  })
+
+  it('fetchTodosRequest test', () => {
+    const generator = fetchTodosRequest()
+    expect(generator.next().value).toEqual(take('TODOS_UPDATE_REQUEST'))
+    expect(generator.next({}).value).toEqual(call(fetchTodos))
+  })
+
+  it('defaultTodoSaga', () => {
+    const generator = saga()
+    expect(generator.next().value).toEqual(fork(fetchTodosRequest))
+    expect(generator.next().value).toEqual(fork(addTodoRequest))
+    expect(generator.next().value).toEqual(fork(deleteTodoRequest))
   })
 
 })
