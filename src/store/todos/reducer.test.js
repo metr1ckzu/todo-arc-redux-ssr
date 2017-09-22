@@ -4,6 +4,7 @@ import todos from './reducer'
 
 describe('todos reducer', () => {
 
+  expect(todos(undefined, {})).toEqual([])
   it('should return default', () => {
     expect(
       todos([{
