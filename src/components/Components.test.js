@@ -1,13 +1,9 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-// import { Provider } from 'react-redux'
-// import { createStore } from 'redux'
-// import todos from '../store/todos/reducer'
 
 import Title from './Title'
 import Todo from './Todo'
 import TodoList from './TodoList'
-// import App from './App'
 import GetTodosButton from './GetTodosButton'
 import AddTodo from './AddTodo'
 
@@ -51,17 +47,6 @@ describe('Components test', () => {
       expect(props.onTodoClick.mock.calls.length).toBe(1)
     })
   })
-
-  // describe('App test', () => {
-  //   it('renders w/o crashing', () => {
-  //     const store = createStore(todoApp)
-  //     const wrapper = mount(<Provider store={store}><App /></Provider>)
-  //     // expect(wrapper.contains(<Title />)).toEqual(true)
-  //     // expect(wrapper.contains().toEqual(true)
-  //     // expect(wrapper.contains(<GetTodosButton />)).toEqual(true)
-  //     // expect(wrapper.contains(<Component />)).toEqual(true)
-  //   })
-  // })
 
   describe('GetTodosButton', () => {
     function setup() {
