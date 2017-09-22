@@ -37,7 +37,8 @@ class VisibleTodoList extends React.Component {
 
     if (!hasServerState) {
       if (isServer) {
-        fetchTodos().then(setServerState, setServerState)
+        fetchTodos()
+        setServerState()
       } else {
         fetchTodos()
       }
