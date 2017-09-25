@@ -1,27 +1,3 @@
-// import { connect } from 'react-redux'
-// import { deleteTodoRequest, fetchTodosRequest } from '../store/actions'
-// import TodoList from '../components/TodoList'
-// import { fetchState } from 'react-router-server'
-// import React from 'react'
-// import { isBrowser, isServer } from 'config'
-//
-// const mapStateToProps = state => {
-//   return {
-//     todos: state.todos
-//   }
-// }
-//
-// const mapDispatchToProps = {
-//   onTodoClick: deleteTodoRequest
-// }
-//
-// const VisibleTodoList = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(TodoList)
-//
-// export default VisibleTodoList
-
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchState } from 'react-router-server'
@@ -59,10 +35,15 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onTodoClick: (id) => dispatch(deleteTodoRequest(id)),
-  fetchTodos: () => dispatch(fetchTodosRequest())
-})
+export const mapDispatchToProps = {
+  onTodoClick: deleteTodoRequest,
+  fetchTodos: fetchTodosRequest
+}
+
+// const mapDispatchToProps = (dispatch) => ({
+//   onTodoClick: (id) => dispatch(deleteTodoRequest(id)),
+//   fetchTodos: () => dispatch(fetchTodosRequest())
+// })
 
 const withServerState = fetchState(
   state => ({
