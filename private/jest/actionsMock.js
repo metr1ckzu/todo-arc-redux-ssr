@@ -18,4 +18,4 @@ const actions = new Proxy({}, {
   },
 })
 
-module.exports = actions
+module.exports = actions.default
