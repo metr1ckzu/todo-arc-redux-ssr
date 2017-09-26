@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddTodo = ({ addTodo }) => {
+const AddTodo = ({ addTodoRequest }) => {
   let input
 
   return (
@@ -11,7 +11,7 @@ const AddTodo = ({ addTodo }) => {
           if (!input.value.trim()) {
             return
           }
-          addTodo(input.value)
+          addTodoRequest(input.value)
           input.value = ''
         }}
         >
