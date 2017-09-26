@@ -4,7 +4,6 @@ import { shallow, mount } from 'enzyme'
 import Title from './Title'
 import Todo from './Todo'
 import TodoList from './TodoList'
-import GetTodosButton from './GetTodosButton'
 import AddTodo from './AddTodo'
 
 
@@ -45,25 +44,6 @@ describe('Components test', () => {
       const { props, wrapper } = setup()
       wrapper.find('button').simulate('click')
       expect(props.onTodoClick.mock.calls.length).toBe(1)
-    })
-  })
-
-  describe('GetTodosButton', () => {
-    function setup() {
-      const props = {
-        onClick : jest.fn(),
-      }
-      const wrapper = mount(<GetTodosButton {...props}/>)
-
-      return {
-        props,
-        wrapper
-      }
-    }
-    it('Should render and retrive todos', () => {
-      const { props, wrapper } = setup()
-      wrapper.find('button').simulate('click')
-      expect(props.onClick.mock.calls.length).toBe(1)
     })
   })
 

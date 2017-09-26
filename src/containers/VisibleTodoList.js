@@ -4,9 +4,9 @@ import { fetchState } from 'react-router-server'
 import { isPending, hasFailed } from 'redux-saga-thunk'
 import { fetchTodosRequest, deleteTodoRequest } from 'store/actions'
 import { isBrowser, isServer } from 'config'
-import TodoList from '../components/TodoList'
+import { TodoList } from 'components'
 
-class VisibleTodoList extends React.Component {
+export class VisibleTodoList extends React.Component {
 
   componentWillMount() {
     const { fetchTodos, hasServerState, setServerState, cleanServerState } = this.props
@@ -29,7 +29,7 @@ class VisibleTodoList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     todos: state.todos
   }
@@ -40,12 +40,7 @@ export const mapDispatchToProps = {
   fetchTodos: fetchTodosRequest
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   onTodoClick: (id) => dispatch(deleteTodoRequest(id)),
-//   fetchTodos: () => dispatch(fetchTodosRequest())
-// })
-
-const withServerState = fetchState(
+export const withServerState = fetchState(
   state => ({
     hasServerState: !!state.todos,
   }),

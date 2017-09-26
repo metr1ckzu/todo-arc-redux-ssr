@@ -1,11 +1,9 @@
-import { connect } from 'react-redux'
-import { addTodoRequest } from '../store/actions'
-import AddTodo from '../components/AddTodo'
+import {connect} from 'react-redux';
+import { addTodoRequest } from 'store/actions';
+import { AddTodo } from 'components'
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   addTodo: addTodoRequest
 }
 
-const AddTodoContainer = connect(null, mapDispatchToProps)(AddTodo)
-
-export default AddTodoContainer
+export default connect(null, mapDispatchToProps)(AddTodo)
