@@ -35,10 +35,10 @@ export const mapStateToProps = state => {
   }
 }
 
-export const mapDispatchToProps = {
-  onTodoClick: deleteTodoRequest,
-  fetchTodos: fetchTodosRequest
-}
+export const mapDispatchToProps = (dispatch) => ({
+  onTodoClick: (id) => dispatch(deleteTodoRequest(id)),
+  fetchTodos: () => dispatch(fetchTodosRequest())
+})
 
 export const withServerState = fetchState(
   state => ({

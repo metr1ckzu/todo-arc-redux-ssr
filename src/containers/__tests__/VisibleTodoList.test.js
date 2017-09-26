@@ -1,27 +1,27 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { mapDispatchToProps, withServerState, mapStateToProps, VisibleTodoList } from './VisibleTodoList'
-import * as actions     from '../store/todos/actions'
+import { mapDispatchToProps, withServerState, mapStateToProps, VisibleTodoList } from '../VisibleTodoList'
 
 
-describe('AddTodoContainer tests', () => {
+describe('VisibleTodoList tests', () => {
 
   it('mapDispatchToProps test', () => {
-    expect(mapDispatchToProps).toEqual({
-      onTodoClick: actions.deleteTodoRequest,
-      fetchTodos: actions.fetchTodosRequest
+    const dispatchSpy = jest.fn()
+    mapDispatchToProps(dispatchSpy).fetchTodos()
+    mapDispatchToProps(dispatchSpy).onTodoClick(1)
+    expect(dispatchSpy.mock.calls).toEqual([
+        [ { type: 'DEFAULT_FETCH_TODOS_REQUEST' } ],
+        [ { type: 'DEFAULT_DELETE_TODO_REQUEST' } ] ])
     })
-  })
 
-  it('mapDispatchToProps test', () => {
+  it('mapStateToProps test', () => {
     const state = {
       todos:{
         test: "test",
-        id: 123,
-        completed: false
+        id: 123
       }
     }
-    expect(mapStateToProps(state)).toEqual({ todos: { test: 'test', id: 123, completed: false } })
+    expect(mapStateToProps(state)).toEqual({ todos: { test: 'test', id: 123} })
   })
 
   it('componentWillMount test', () => {
