@@ -40,4 +40,3 @@ Features:
 2) saving and fetching data with API
 3) handling side effects with saga
 4) Server Side Rendering
-
