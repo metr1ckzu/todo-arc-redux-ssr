@@ -41,7 +41,7 @@
     "@storybook/react": "^3.0.0",
     "@webpack-blocks/dev-server2": "^0.4.0",
     "@webpack-blocks/webpack2": "^0.4.0",
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
     "babel-jest": "^21.0.0",
